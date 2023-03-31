@@ -55,6 +55,8 @@ class Parser:
         if self.token.type == TokenType.LPAREN:
             self.step_token()
             result = self.add_or_sub()  # Treat inside of parens as top level
+            if not self.token:
+                raise Exception(f"Parser Error: Expected RPAREN, got EOF")
             if self.token.type != TokenType.RPAREN:
                 raise Exception(f"Parser Error: Expected RPAREN, got {self.token}")
             self.step_token()
