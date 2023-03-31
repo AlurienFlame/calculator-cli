@@ -21,7 +21,6 @@ class BinaryOperator:
         return f"({self.left} {self.op.name} {self.right})"
 
 
-
 @dataclass
 class UnaryOperator:
     op: any
@@ -29,6 +28,7 @@ class UnaryOperator:
 
     def __repr__(self) -> str:
         return f"({self.op.name} {self.right})"
+
 
 @dataclass
 class NullaryOperator:

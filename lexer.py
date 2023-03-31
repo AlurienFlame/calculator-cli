@@ -1,5 +1,6 @@
 from tokens import *
 
+
 def lex(source: str) -> list[Token]:
     tokens = []
 
@@ -41,5 +42,4 @@ def lex(source: str) -> list[Token]:
             raise Exception(f"{i}: Tokenizer Error: Unexpected character '{current_char}'")
         i += 1
 
-    print(f"Tokens: {tokens}")
     return tokens

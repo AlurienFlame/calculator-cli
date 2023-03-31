@@ -6,9 +6,11 @@ while True:
     try:
         source = input("> ")
         tokens = lex(source)
+        print(f"Tokens: {tokens}")
         ast = parse(tokens)
+        print(f"Syntax Tree: {ast}")
         result = evaluate(ast)
-        print(f"= {result}")
+        print(f"Result: {result}")
     except EOFError:
         print("quit")
         break
