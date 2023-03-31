@@ -3,10 +3,10 @@ from tokens import TokenType, Token
 from operators import *
 
 # TODO: Switch to iterative approach using a stack
-# TODO: Switch to functional approach
 
 
 class Parser:
+
     def __init__(self, tokens: list[Token]) -> None:
         self.tokens = iter(tokens)
 
@@ -20,6 +20,9 @@ class Parser:
         # Consume the iterator, replacing each token with nodes based on order of operations (the grammar)
         self.step_token()
         ast = self.add_or_sub()  # Outermost level
+        if self.token:
+            # TODO: col/line number tracking for parser
+            raise Exception(f"Parser Error: Expected EOF, got {self.token} ({self.token.value})")
         return ast
 
     def add_or_sub(self):
@@ -53,7 +56,7 @@ class Parser:
             self.step_token()
             result = self.add_or_sub()  # Treat inside of parens as top level
             if self.token.type != TokenType.RPAREN:
-                raise Exception(f"Expected RPAREN, got {self.token}")
+                raise Exception(f"Parser Error: Expected RPAREN, got {self.token}")
             self.step_token()
             return result
         return self.negative()
@@ -68,7 +71,7 @@ class Parser:
     def constant(self):
 
         if self.token.type != TokenType.NUM:
-            raise Exception(f"Expected NUM, got {self.token}")
+            raise Exception(f"Parser Error: Expected NUM, got {self.token}")
 
         result = NullaryOperator(self.token.value)
         self.step_token()
