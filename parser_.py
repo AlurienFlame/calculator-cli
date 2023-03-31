@@ -71,7 +71,7 @@ class Parser:
         if self.token.type != TokenType.NUM:
             raise Exception(f"Expected NUM, got {self.token}")
 
-        result = self.token
+        result = NullaryOperator(self.token.value)
         self.step_token()
 
         return result

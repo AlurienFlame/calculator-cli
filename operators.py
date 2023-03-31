@@ -6,7 +6,8 @@ OperatorType = Enum("OperatorType", [
     "SUBTRACT",
     "MULTIPLY",
     "DIVIDE",
-    "NEGATE"
+    "NEGATE",
+    "NULL"
 ])
 
 
@@ -17,7 +18,8 @@ class BinaryOperator:
     right: any
 
     def __repr__(self) -> str:
-        return f"({self.left} {self.op} {self.right})"
+        return f"({self.left} {self.op.name} {self.right})"
+
 
 
 @dataclass
@@ -26,4 +28,11 @@ class UnaryOperator:
     right: any
 
     def __repr__(self) -> str:
-        return f"({self.op} {self.right})"
+        return f"({self.op.name} {self.right})"
+
+@dataclass
+class NullaryOperator:
+    value: any
+
+    def __repr__(self) -> str:
+        return f"{self.value}"
